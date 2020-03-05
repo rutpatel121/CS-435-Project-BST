@@ -9,12 +9,14 @@ class Node:
     self.key = key
   
   def insertRec(self, key):
+    # creating child from key
     child = Node(key)
     if key >= self.key:
       if self.right is None:
         self.right = child
-      else:
+      else: # insert somewhere in right side
         self.right.insertRec(key)
+        # insert somewhere in left side
     else:
       if self.left is None:
         self.left = child
@@ -31,13 +33,15 @@ class Node:
       root.right= deleteRec(root.right, key)
   """
   def deleteRec(self, key):
-    if self is None:
+    # node was not found
+    if self == None:
       return self
+      #searching for node in right and left
     if key > self.key and self.right is not None:
       self.right = self.right.deleteRec(key)
     elif key < self.key and self.left.key is not None:
       self.left = self.left.deleteRec(key)
-    else:
+    else: # if node has at most one child, set right child as node and delete node
       if self.left is None: 
         move = self.right
         self = None
